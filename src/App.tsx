@@ -108,6 +108,21 @@ function App() {
     setTitle(values.title);
   };
 
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.code === 'Space') {
+        event.preventDefault();
+        setIsPlaying((prevState) => !prevState);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
   return (
     <main className="w-full h-dvh relative p-8">
       <div className="puff-font text-4xl text-primary-color">CAFE VIBES</div>
